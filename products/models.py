@@ -13,3 +13,6 @@ class Products(models.Model):
     discount = models.IntegerField()
     created_date = models.DateField(default=timezone.now)
     published_date = models.DateField(blank=True, null=True)
+
+    def __str__(self):
+        return f'{self.name} | {self.brand}'
