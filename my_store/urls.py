@@ -1,6 +1,8 @@
 from django.contrib import admin
 from django.http import HttpResponse
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 
 def hello(request):
     return HttpResponse('<H1>HOLA 💗</H1>')
@@ -17,4 +19,4 @@ urlpatterns = [
     path('hello/', hello, name='hello'),
     #Ruta para enviar parámetros
     path('table/<int:num>', multiply, name='multiply')
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
