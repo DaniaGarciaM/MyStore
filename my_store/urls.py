@@ -14,9 +14,10 @@ def multiply(request, num):
     return HttpResponse(f'<h3>{html}</h3>')
 
 urlpatterns = [
-    path('', include('products.urls')),
+    path('products/', include('products.urls')),
     path('admin/', admin.site.urls),
     path('hello/', hello, name='hello'),
     #Ruta para enviar parámetros
-    path('table/<int:num>', multiply, name='multiply')
+    path('table/<int:num>', multiply, name='multiply'),
+    path('', include('polls.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
