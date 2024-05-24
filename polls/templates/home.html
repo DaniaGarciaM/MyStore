@@ -1,4 +1,8 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
 <h1>WELCOME HOME</h1>
 <a href="{% url 'poll:get_polls' %}">Ir a Encuestas</a>
+{% endblock content %}
 
 <!-- poll es el nombre de la app, y get_polls es el nombre de la función -->
