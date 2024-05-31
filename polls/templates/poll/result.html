@@ -5,6 +5,7 @@
 
 
 {% block content %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <h1>{{ question.question_text }}</h1>
 <ul>
     {% for c in question.choice_set.all %}
@@ -12,9 +13,40 @@
         voto{{ c.votes | pluralize }}
     </li>
     {% endfor %}
-</ul> 
+</ul>
+<hr>
+<div style="width: 400px; margin: 0 auto;">
+    <canvas id="myChart"></canvas>
+</div>
 <hr>
 <a href="{% url 'poll:get_polls' %}">Encuestas</a>
+<script>
+    var jsonData = JSON.parse('{{ info|escapejs }}');
+    console.log(jsonData); //Checa que el json llegue completo
+    var labels = jsonData.labels;
+    var data = jsonData.data;
+    console.log(labels); // Imprime las etiquetas en la consola
+    console.log(data); // Imprime los datos en la consola
+
+    const ctx = document.getElementById('myChart');
+
+    new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: '# of Votes',
+                data: data,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
 {% endblock content %}
-    
-    
